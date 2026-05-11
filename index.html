@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaliação Inteligente</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app.no-sidebar {
+      grid-template-columns: 1fr !important;
+    }
+
+    .app.no-sidebar main {
+      max-width: 1380px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .app.no-sidebar .mobile-brand {
+      display: flex;
+      margin-bottom: 16px;
+    }
+
+    .compat-hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="compat-hidden" aria-hidden="true">
+    <span id="sideNome"></span>
+    <span id="sideId"></span>
+    <span id="sideTurma"></span>
+    <span id="sideCount"></span>
+  </div>
+
+  <div class="app no-sidebar">
+    <main>
+      <div class="brand mobile-brand">
+        <div class="logo">🧠</div>
+        <div>
+          <h1>Avaliação Inteligente</h1>
+          <span>Pareceres com IA</span>
+        </div>
+      </div>
+      <div class="topbar">
+        <div class="field">
+          <label>Pesquisar aluno</label>
+          <input id="buscaAluno" type="text" placeholder="Digite parte do nome..." />
+        </div>
+        <div class="field">
+          <label>Turma</label>
+          <input id="turmaBusca" type="text" value="" />
+        </div>
+        <button class="btn soft" onclick="pesquisarAluno()">🔎 Buscar</button>
+        <button class="btn" onclick="limparBusca()">Limpar</button>
+      </div>
+
+      <section class="hero">
+        <div>
+          <h2>Registro avaliativo por marcadores</h2>
+          <p>Marque as características observadas e gere um conjunto organizado de dados para a IA transformar em parecer descritivo.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong id="totalItens">10</strong><span>itens</span></div>
+          <div class="stat"><strong id="totalSelecionados">0</strong><span>selecionados</span></div>
+          <div class="stat"><strong>IA</strong><span>pronto</span></div>
+        </div>
+        
+      <div class="stat progress-card">
+      <strong id="percentualAvaliacoes">0%</strong>
+      <span>Avaliações concluídas</span>
+      <div class="progress-bar">
+        <div id="barraAvaliacoes"></div>
+      </div>
+      </div> 
+
+      </section>
+       
+      <div class="nav nav-top">
+      <button class="btn" onclick="primeiroAluno()">⏮</button>
+      <button class="btn" onclick="alunoAnterior()">◀</button>
+      <button class="btn" onclick="proximoAluno()">▶</button>
+      <button class="btn" onclick="ultimoAluno()">⏭</button>
+      <button class="btn primary" onclick="novoRegistro()">＋ Novo</button>
+      </div>
+      
+      <section class="student-form">
+        <div class="field">
+          <label>ID</label>
+          <input id="idAluno" value="--" />
+        </div>
+        <div class="field">
+          <label>Nome</label>
+          <input id="nomeAluno" value="Carregando...." />
+        </div>
+        <div class="field">
+          <label>Turma</label>
+          <input id="turmaAluno" value="-" />
+        </div>
+        <div class="field">
+          <label>Trimestre</label>
+          <select id="trimestre">
+            <option>1º trimestre</option>
+            <option>2º trimestre</option>
+            <option>3º trimestre</option>
+          </select>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Itens avaliativos</h3>
+              <span>Checklist dinâmico organizado por blocos pedagógicos</span>
+            </div>
+            <button class="btn soft" onclick="limparChecks()">Limpar seleção</button>
+          </div>
+          <div id="avaliacaoContainer" class="categories"></div>
+        </section>
+
+        <aside class="right-col">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Observações</h3>
+                <span>Informação livre para complementar a IA</span>
+              </div>
+            </div>
+            <textarea id="observacoes" placeholder="Ex.: apresenta maior dificuldade nas atividades que exigem leitura, mas demonstra interesse quando recebe apoio..."></textarea>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Dados enviados para IA</h3>
+                <span>Prévia em JSON</span>
+              </div>
+            </div>
+            <div id="jsonPreview" class="json-preview"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Parecer descritivo</h3>
+                <span>Dados gerados pela IA</span>
+              </div>
+            </div>
+            <textarea class="parecer" placeholder="Parecer gerado pela IA..."></textarea>
+            <div class="action-grid">
+              <button class="btn primary" onclick="gerarParecerIA()">🤖 Gerar parecer</button>
+              <button class="btn success" onclick="salvarNoSheets(true)">☁️ Salvar</button>
+              <button class="btn">📋 Copiar</button>
+              <button class="btn">⬇️ Exportar</button>
+            </div>
+          </section>
+        </aside>
+      </div>
+
+      <div class="nav">
+      <button class="btn" onclick="primeiroAluno()">⏮</button>
+      <button class="btn" onclick="alunoAnterior()">◀</button>
+      <button class="btn" onclick="proximoAluno()">▶</button>
+      <button class="btn" onclick="ultimoAluno()">⏭</button>
+      <button class="btn primary" onclick="novoRegistro()">＋ Novo</button>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/dados.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
