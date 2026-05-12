@@ -21,42 +21,70 @@ function normalizarId(texto) {
 }
 
 function renderizarItens() {
+  const container = document.getElementById("avaliacaoContainer");
   container.innerHTML = "";
-  document.getElementById("totalItens").textContent = itensAvaliativos.length;
 
-  itensAvaliativos.forEach((item) => {
-    const card = document.createElement("div");
-    card.className = "category";
+  let totalItens = 0;
 
-    const header = document.createElement("div");
-    header.className = "category-title";
-    header.innerHTML = `<h4>${item.icone} ${item.titulo}</h4><span class="count" data-count="${item.titulo}">0</span>`;
-    card.appendChild(header);
+  DADOS_AVALIACAO.forEach((categoria) => {
+    const details = document.createElement("details");
+    details.className = "category-card";
 
-    item.opcoes.forEach((opcao) => {
-      const id = normalizarId(item.titulo + "_" + opcao);
+    // Desktop aberto, celular fechado
+    if (window.innerWidth > 768) {
+      details.open = false;
+    }
+
+    const titulo = categoria.titulo;
+    const icone = categoria.icone || "📌";
+    const opcoes = categoria.opcoes || categoria.itens || [];
+
+    totalItens += opcoes.length;
+
+    const summary = document.createElement("summary");
+    summary.className = "category-header";
+
+    summary.innerHTML = `
+      <div>
+        <h4>${icone} ${titulo}</h4>
+      </div>
+      <span class="pill warning" data-count="${titulo}">0</span>
+    `;
+
+    const body = document.createElement("div");
+    body.className = "category-body";
+
+    opcoes.forEach((opcao) => {
+      const textoOpcao = typeof opcao === "string" ? opcao : opcao.texto;
 
       const label = document.createElement("label");
-      label.className = "option";
-      label.htmlFor = id;
+      label.className = "check-row";
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.id = id;
-      checkbox.dataset.item = item.titulo;
-      checkbox.dataset.opcao = opcao;
-      checkbox.addEventListener("change", atualizarPreview);
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.dataset.item = titulo;
+      input.dataset.opcao = textoOpcao;
+
+      input.addEventListener("change", () => {
+        label.classList.toggle("active", input.checked);
+        atualizarPreview();
+      });
 
       const span = document.createElement("span");
-      span.textContent = opcao;
+      span.textContent = textoOpcao;
 
-      label.appendChild(checkbox);
+      label.appendChild(input);
       label.appendChild(span);
-      card.appendChild(label);
+      body.appendChild(label);
     });
 
-    container.appendChild(card);
+    details.appendChild(summary);
+    details.appendChild(body);
+    container.appendChild(details);
   });
+
+  document.getElementById("totalItens").textContent = totalItens;
+  atualizarPreview();
 }
 
 function coletarDados() {
@@ -84,21 +112,55 @@ function coletarDados() {
 }
 
 function atualizarContadores() {
-  const total = document.querySelectorAll('input[type="checkbox"]:checked').length;
+
+  const total = document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+  ).length;
+
   document.getElementById("totalSelecionados").textContent = total;
-  document.getElementById("sideCount").textContent = `${total} marcadores`;
-  document.getElementById("sideNome").textContent = document.getElementById("nomeAluno").value || "Aluno atual";
+
+  document.getElementById("sideCount").textContent =
+    `${total} marcadores`;
+
+  document.getElementById("sideNome").textContent =
+    document.getElementById("nomeAluno").value || "Aluno atual";
 
   document.getElementById("sideId").textContent =
     `ID ${document.getElementById("idAluno").value || "--"}`;
+
   document.getElementById("sideTurma").textContent =
     `Turma ${document.getElementById("turmaAluno").value || "--"}`;
 
-  itensAvaliativos.forEach(item => {
-    const count = document.querySelectorAll(`input[data-item="${item.titulo}"]:checked`).length;
-    const el = document.querySelector(`[data-count="${item.titulo}"]`);
-    if (el) el.textContent = count;
+  DADOS_AVALIACAO.forEach(item => {
+
+    const count = document.querySelectorAll(
+      `input[data-item="${item.titulo}"]:checked`
+    ).length;
+
+    const el = document.querySelector(
+      `[data-count="${item.titulo}"]`
+    );
+
+    if (!el) return;
+
+    el.textContent = count;
+
+    /* COR DINÂMICA */
+
+    if (count > 0) {
+
+      el.classList.remove("warning");
+      el.classList.add("success");
+
+    } else {
+
+      el.classList.remove("success");
+      el.classList.add("warning");
+
+    }
+
   });
+
 }
 
 function atualizarPreview() {

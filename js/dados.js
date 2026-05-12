@@ -1,5 +1,5 @@
 // Itens avaliativos do checklist
-const itensAvaliativos = [
+const DADOS_AVALIACAO = [
       {
         titulo: "Comportamento e convivência",
         icone: "🤝",
