@@ -1,16 +1,15 @@
 // Itens avaliativos do checklist
 const DADOS_AVALIACAO = [
       {
-        titulo: "Necessidades específicas / acompanhamento",
+        titulo: "Necessidades específicas",
         icone: "🧩",
         opcoes: [
           "TEA - Transtorno do Espectro Autista",
           "TDAH - Transtorno de Déficit de Atenção/Hiperatividade",
           "TOD - Transtorno Opositivo Desafiador",
           "Dislexia",
-          "Discalculia",
           "Deficiência intelectual",
-          "Altas habilidades / superdotação",
+          "Altas habilidades",
           "Transtorno de linguagem",
           "Deficiência auditiva",
           "Deficiência visual",
@@ -57,6 +56,8 @@ const DADOS_AVALIACAO = [
         icone: "🤝",
         opcoes: [
           "Respeita os colegas",
+          "Tem dificuldade em seguir os combinados",
+          "Apresenta resistencia ás orientações"
           "Respeita o professor",
           "Cumpre combinados da aula",
           "Coopera com o grupo",
@@ -86,7 +87,8 @@ const DADOS_AVALIACAO = [
           "Distrai-se com facilidade",
           "Necessita mediação para manter o foco",
           "Necessita de chamados frequentes",
-          "Tem dificuldade em permacer sentado"
+          "Tem dificuldade em permacer sentado",
+          "Atrapalha as aulas em alguns momentos"
         ]
       },
       {
@@ -130,7 +132,7 @@ const DADOS_AVALIACAO = [
           "Consegue fazer uso satisfatório dos recursos computacionais básicos",
           "Demonstra boa coordenação motora fina",
           "Apresenta evolução no uso dos recursos computacionais",
-          "Necessita desenvolver maior precisão",
+          "Necessita desenvolver a motricidade",
           "Apresenta dificuldade no uso dos recursos tecnológicos"
         ]
       },
@@ -153,7 +155,8 @@ const DADOS_AVALIACAO = [
           "Relata procedimentos realizados",
           "Compartilha descobertas com os colegas",
           "Apresenta timidez ao se comunicar",
-          "Necessita incentivo para se expressar"
+          "Necessita incentivo para se expressar",
+          "Tem dificuldade de comuniação",                 
         ]
       },
       {
