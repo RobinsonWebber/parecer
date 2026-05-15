@@ -1,6 +1,58 @@
 // Itens avaliativos do checklist
 const DADOS_AVALIACAO = [
       {
+        titulo: "Necessidades específicas / acompanhamento",
+        icone: "🧩",
+        opcoes: [
+          "TEA - Transtorno do Espectro Autista",
+          "TDAH - Transtorno de Déficit de Atenção/Hiperatividade",
+          "TOD - Transtorno Opositivo Desafiador",
+          "Dislexia",
+          "Discalculia",
+          "Deficiência intelectual",
+          "Altas habilidades / superdotação",
+          "Transtorno de linguagem",
+          "Deficiência auditiva",
+          "Deficiência visual",
+          "Paralisia cerebral",
+          "Epilepsia",
+          "Acompanhamento multiprofissional",
+          "Necessita mediação constante",
+          "Necessita adaptação curricular",
+          "Necessita apoio individualizado",
+          "Necessita flexibilização das atividades",
+          "Necessita maior tempo para realização",
+          "Apresenta sensibilidade sensorial",
+          "Utiliza recursos de acessibilidade"
+        ]
+      },
+      {
+        titulo: "Aspectos emocionais",
+        icone: "💛",
+        opcoes: [
+          "Demonstra segurança emocional",
+          "Relaciona-se de forma afetiva com colegas e professores",
+          "Apresenta boa autoestima",
+          "Demonstra estabilidade emocional durante as atividades",
+          "Aceita orientações e correções com tranquilidade",
+          "Apresenta sensibilidade emocional",
+          "Demonstra ansiedade em algumas situações",
+          "Apresenta insegurança para realizar atividades",
+          "Frustra-se com facilidade",
+          "Necessita incentivo emocional frequente",
+          "Apresenta resistência diante de desafios",
+          "Demonstra dependência emocional do professor",
+          "Necessita acolhimento em momentos específicos",
+          "Apresenta oscilação de humor",
+          "Demonstra dificuldade em lidar com erros",
+          "Apresenta baixa tolerância à frustração",
+          "Necessita auxílio para resolução de conflitos",
+          "Demonstra comportamento retraído",
+          "Busca constantemente aprovação do professor",
+          "Apresenta evolução no controle emocional"
+        ]
+      },
+      {
         titulo: "Comportamento e convivência",
         icone: "🤝",
         opcoes: [
