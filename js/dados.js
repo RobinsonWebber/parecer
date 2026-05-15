@@ -156,7 +156,7 @@ const DADOS_AVALIACAO = [
           "Compartilha descobertas com os colegas",
           "Apresenta timidez ao se comunicar",
           "Necessita incentivo para se expressar",
-          "Tem dificuldade de comuniação",                 
+          "Tem dificuldade de comuniação"               
         ]
       },
       {
